@@ -146,7 +146,7 @@ function stay(){
   userFinalHandValue = getHandValue("user");
   currentPlayer = "dealer";
   dealerSecondCard();
-  while (roundIsOver === false && getHandValue("dealer") < 16){
+  while (roundIsOver === false && getHandValue("dealer") <= 16){
   setTimeout(dealerMove(), 800);
   }
   compareHands(getHandValue("dealer"));
