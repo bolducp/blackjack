@@ -1,0 +1,35 @@
+body{
+  background-color: #006e2e;
+  text-align: center;
+  color: Cornsilk;
+  font-size: 33px;
+  font-family: 'Dancing Script', cursive;
+
+}
+
+h1 {
+  text-align: center;
+  font-size: 45px;
+  color: Cornsilk;
+}
+
+#board{
+  display:none;
+}
+
+#nextHand{
+  display:none;
+}
+
+.card{
+  height:180px;
+  width: 130px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.row{
+  margin-top: 2%;
+  margin-bottom: 2%;
+
+}
