@@ -63,7 +63,7 @@ function deal(){
   setTimeout(function(){makeCard(playerCard, "user")}, 600);
   setTimeout(function(){makeCard(playerCard2, "user")}, 900);
   setTimeout(function(){
-  setTimeout(function(){$('#roundButtons').show();}, 1200);
+  setTimeout(function(){$('#roundButtons').show();}, 100);
     if (getHandValue("user") === 22){
       return;
     } else {
