@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
 
   <link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
   <link rel="stylesheet" href="style.css">
@@ -18,15 +19,23 @@
     <button id="deal" type="button" class="btn btn-info btn-lg">Deal Hand</button>
     <div class="row" id="displayOutcome"></div>
     <div id="board">
-        <div class="row" id="dealerHand">Dealer Hand:</div>
-        <div class="row" id="userHand">Player Hand:</div>
-      <div id="roundButtons" class="row">
-        <p id="userScore"></p>
-        <button id="hit" type="button" class="btn btn-info-outline">Hit</button>
-        <button id="stay" type="button" class="btn btn-info-outline">Stand</button>
+      <div class="row">
+        <div class="col-xs-2">Dealer Hand:</div>
+        <div id="dealerHand" class="col-xs-7"></div>
+        <div id="dealerScore"class="col-xs-3"></div>
       </div>
       <div class="row">
-        <button id="nextHand" type="button" class="btn btn-info-outline">Next Round</button>
+        <div class="col-xs-2">Player Hand:</div>
+        <div id="userHand" class="col-xs-7"></div>
+        <div id="userScore"class="col-xs-3"></div>
+      </div>
+
+      <div id="roundButtons" class="row">
+        <button type="button" id="hit" class="btn btn-warning btn-lg">Hit</button>
+        <button id="stay" type="button" class="btn btn-warning btn-lg">Stand</button>
+      </div>
+      <div class="row">
+        <button id="nextHand" type="button" class="btn btn-info btn-lg">Next Round</button>
       </div>
     </div>
     <div class="row">

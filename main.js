@@ -63,10 +63,14 @@ function deal(){
   setTimeout(function(){makeCard(playerCard, "user")}, 600);
   setTimeout(function(){makeCard(playerCard2, "user")}, 900);
   setTimeout(function(){$('#userScore').text("Player's running score: " + getHandValue("user"))}, 1100);
+  setTimeout(function(){$('#roundButtons').show();}, 1200);
 
   if (checkForBlackjack("user")){
-    setTimeout(function(){alert("blackjack!");
-    roundIsOver = true;}, 200);
+    $('#roundButtons').hide();
+    setTimeout(function(){
+      $('#displayOutcome').text("Blackjack! User wins!")
+          .addClass("animated flash");
+          roundIsOver = true;}, 200);
     roundOver();
   }
 }
@@ -98,9 +102,8 @@ function checkForBlackjack(){
   return false;
 }
 
-
 function checkForBust(person){
-  if (getHandValue(person) < 21){
+  if (getHandValue(person) <= 21){
     return false;
   }
   var index = _.findIndex(hands[person], function(card){
@@ -120,14 +123,24 @@ function hit(){
   makeCard(newCard, currentPlayer);
   updateHandScore();
 
-  if (checkForBust("user")){
-      setTimeout(function(){
-      $('#displayOutcome').text("Bust! Dealer wins.")
-        .addClass("animated flash");
-      roundIsOver = true;}, 300);
-      roundOver();
+  if (currentPlayer === "user"){
+    if (checkForBust("user")){
+        setTimeout(function(){
+          $('#displayOutcome').text("User busts! Dealer wins this hand.")
+            .addClass("animated flash");
+          roundIsOver = true;}, 300);
+          roundOver();
+        }
+    } else if (currentPlayer === "dealer"){
+      if (checkForBust("dealer")){
+        setTimeout(function(){
+          $('#displayOutcome').text("Dealer busts! User wins this hand.")
+            .addClass("animated flash");
+          roundIsOver = true;}, 300);
+        roundOver();
+      }
+    }
   }
-}
 
 function stay(){
   userFinalHandValue = getHandValue("user");
@@ -143,14 +156,6 @@ function dealerSecondCard(){
   var secondCard = getCard();
   hands.dealer.push(secondCard);
   $("#dealerSecond").attr('src', 'static/' + secondCard.image)
-
-  if (checkForBust(currentPlayer)){
-      setTimeout(function(){
-      $('#displayOutcome').text(currentPlayer + "busts! User wins the hand.")
-          .addClass("animated flash");;;
-      roundIsOver = true;}, 300);
-      roundOver();
-  }
 }
 
 function dealerMove(){
@@ -158,12 +163,15 @@ function dealerMove(){
   if (dealerSum > 16){
     return compareHands(dealerSum);
   } else {
-    return hit();
+    return setTimeout(hit(), 300);
   }
 }
 
 function compareHands(dealerSum){
   roundIsOver = true;
+  setTimeout(function(){$('#dealerScore').text("Dealer's final score: " + getHandValue("dealer"))}, 200);
+  setTimeout(function(){$('#userScore').text("Player's final score: " + getHandValue("user"))}, 200);
+
   if (dealerSum === userFinalHandValue){
     setTimeout(function(){
       $('#displayOutcome').text("The hand is a draw!")
@@ -171,12 +179,12 @@ function compareHands(dealerSum){
     }, 200);
   } else if (dealerSum <= 21 && dealerSum > userFinalHandValue){
     setTimeout(function(){
-      $('#displayOutcome').text("Dealer Wins this hand!")
+      $('#displayOutcome').text("Dealer wins this hand!")
           .addClass("animated flash");;
     }, 200);
   } else{
     setTimeout(function(){
-      $('#displayOutcome').text("User Wins this hand!")
+      $('#displayOutcome').text("User wins this hand!")
           .addClass("animated flash");;
     }, 200);
   }

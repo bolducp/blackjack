@@ -3,27 +3,45 @@ body {
   text-align: center;
   color: Cornsilk;
   font-size: 33px;
-  font-family: 'Dancing Script', cursive; }
+  font-family: 'Dancing Script', cursive;
+}
 
 h1 {
   text-align: center;
   font-size: 45px;
-  color: Cornsilk; }
+  color: Cornsilk;
+}
 
 #board {
-  display: none; }
+  display:none;
+}
 
 #nextHand {
-  display: none; }
+  display:none;
+}
+
+#roundButtons {
+  display:none;
+}
+
+#displayOutcome {
+  color: Salmon;
+  font-size: 40px;
+  padding:5px;
+}
+
+button {
+  font-family: 'Dosis', sans-serif;
+}
 
 .card {
-  height: 180px;
+  height:180px;
   width: 130px;
   border-radius: 5px;
-  border: 1px solid black; }
+  border: 1px solid black;
+}
 
-.row {
+.row{
   margin-top: 2%;
-  margin-bottom: 2%; }
-
-/*# sourceMappingURL=style.css.map */
+  margin-bottom: 2%;
+}
