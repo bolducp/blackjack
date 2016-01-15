@@ -5,6 +5,7 @@
 
   <link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
   <link rel="stylesheet" href="style.css">
   <title>Blackjack</title>
 </head>
@@ -15,13 +16,14 @@
       <h1>Welcome to Paige's Blackjack Game!</h1>
     </div>
     <button id="deal" type="button" class="btn btn-info btn-lg">Deal Hand</button>
+    <div class="row" id="displayOutcome"></div>
     <div id="board">
         <div class="row" id="dealerHand">Dealer Hand:</div>
         <div class="row" id="userHand">Player Hand:</div>
       <div id="roundButtons" class="row">
         <p id="userScore"></p>
         <button id="hit" type="button" class="btn btn-info-outline">Hit</button>
-        <button id="stay" type="button" class="btn btn-info-outline">Stay</button>
+        <button id="stay" type="button" class="btn btn-info-outline">Stand</button>
       </div>
       <div class="row">
         <button id="nextHand" type="button" class="btn btn-info-outline">Next Round</button>

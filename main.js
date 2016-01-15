@@ -58,11 +58,11 @@ function deal(){
   $('#deal').hide();
   setTimeout(function(){
     var $card = $('<img>').addClass("card").attr({id:"dealerSecond", src:"static/back.jpg"});
-    $("#dealerHand").append($card);}, 200);
-  setTimeout(function(){makeCard(dealerFirstCard, "dealer")}, 600);
-  setTimeout(function(){makeCard(playerCard, "user")}, 900);
-  setTimeout(function(){makeCard(playerCard2, "user")}, 1300);
-  updateHandScore();
+    $("#dealerHand").append($card);}, 100);
+  setTimeout(function(){makeCard(dealerFirstCard, "dealer")}, 400);
+  setTimeout(function(){makeCard(playerCard, "user")}, 600);
+  setTimeout(function(){makeCard(playerCard2, "user")}, 900);
+  setTimeout(function(){$('#userScore').text("Player's running score: " + getHandValue("user"))}, 1100);
 
   if (checkForBlackjack("user")){
     setTimeout(function(){alert("blackjack!");
@@ -88,7 +88,7 @@ function getHandValue(person){
 
 function updateHandScore(){
   setTimeout(function(){$('#userScore')
-    .text("Player's running score: " + getHandValue("user"))}, 1500);
+    .text("Player's running score: " + getHandValue("user"))}, 100);
 }
 
 function checkForBlackjack(){
@@ -97,6 +97,7 @@ function checkForBlackjack(){
   }
   return false;
 }
+
 
 function checkForBust(person){
   if (getHandValue(person) < 21){
@@ -119,8 +120,10 @@ function hit(){
   makeCard(newCard, currentPlayer);
   updateHandScore();
 
-  if (checkForBust(currentPlayer)){
-      setTimeout(function(){alert("BUST!");
+  if (checkForBust("user")){
+      setTimeout(function(){
+      $('#displayOutcome').text("Bust! Dealer wins.")
+        .addClass("animated flash");
       roundIsOver = true;}, 300);
       roundOver();
   }
@@ -130,9 +133,10 @@ function stay(){
   userFinalHandValue = getHandValue("user");
   currentPlayer = "dealer";
   dealerSecondCard();
-  while (roundIsOver === false){
-  dealerMove();
+  while (roundIsOver === false && getHandValue("dealer") < 16){
+  setTimeout(dealerMove(), 800);
   }
+  compareHands(getHandValue("dealer"));
 }
 
 function dealerSecondCard(){
@@ -141,7 +145,9 @@ function dealerSecondCard(){
   $("#dealerSecond").attr('src', 'static/' + secondCard.image)
 
   if (checkForBust(currentPlayer)){
-      setTimeout(function(){alert("BUST!");
+      setTimeout(function(){
+      $('#displayOutcome').text(currentPlayer + "busts! User wins the hand.")
+          .addClass("animated flash");;;
       roundIsOver = true;}, 300);
       roundOver();
   }
@@ -159,11 +165,20 @@ function dealerMove(){
 function compareHands(dealerSum){
   roundIsOver = true;
   if (dealerSum === userFinalHandValue){
-    setTimeout(function(){alert("tie!")}, 200);
-  } else if (dealerSum > userFinalHandValue){
-    setTimeout(function(){alert("dealerwins!")}, 200);
+    setTimeout(function(){
+      $('#displayOutcome').text("The hand is a draw!")
+          .addClass("animated flash");;
+    }, 200);
+  } else if (dealerSum <= 21 && dealerSum > userFinalHandValue){
+    setTimeout(function(){
+      $('#displayOutcome').text("Dealer Wins this hand!")
+          .addClass("animated flash");;
+    }, 200);
   } else{
-    setTimeout(function(){alert("user wins!")}, 200);
+    setTimeout(function(){
+      $('#displayOutcome').text("User Wins this hand!")
+          .addClass("animated flash");;
+    }, 200);
   }
   roundOver();
 }
