@@ -62,14 +62,19 @@ function deal(){
   setTimeout(function(){makeCard(dealerFirstCard, "dealer")}, 400);
   setTimeout(function(){makeCard(playerCard, "user")}, 600);
   setTimeout(function(){makeCard(playerCard2, "user")}, 900);
-  setTimeout(function(){
-  setTimeout(function(){$('#roundButtons').show();}, 100);
-    if (getHandValue("user") === 22){
-      return;
-    } else {
-        $('#userScore').text("Player's running score: " + getHandValue("user"))}
-  }, 1100);
+  setTimeout(function(){$('#roundButtons').show();}, 1000);
 
+  if (getHandValue("user") === 22){
+    var index = _.findIndex(hands["user"], function(card){
+      return card.value === 11;
+    });
+    if (index > -1){
+    hands["user"][index].value = 1;
+    checkForBust("user");
+    } else {
+      return;
+      }
+  }
   if (checkForBlackjack("user")){
     $('#roundButtons').hide();
     setTimeout(function(){
@@ -78,6 +83,7 @@ function deal(){
           roundIsOver = true;}, 200);
     roundOver();
   }
+  setTimeout(function(){$('#userScore').text("Player's running score: " + getHandValue("user"))}, 1100);
 }
 
 function makeCard(cardObj, person){
