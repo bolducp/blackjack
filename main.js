@@ -62,8 +62,13 @@ function deal(){
   setTimeout(function(){makeCard(dealerFirstCard, "dealer")}, 400);
   setTimeout(function(){makeCard(playerCard, "user")}, 600);
   setTimeout(function(){makeCard(playerCard2, "user")}, 900);
-  setTimeout(function(){$('#userScore').text("Player's running score: " + getHandValue("user"))}, 1100);
+  setTimeout(function(){
   setTimeout(function(){$('#roundButtons').show();}, 1200);
+    if (getHandValue("user") === 22){
+      return;
+    } else {
+        $('#userScore').text("Player's running score: " + getHandValue("user"))}
+  }, 1100);
 
   if (checkForBlackjack("user")){
     $('#roundButtons').hide();
